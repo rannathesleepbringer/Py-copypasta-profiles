@@ -2,19 +2,18 @@ import keyboard as kb
 import pyperclip
 from time import sleep
 
+#change prefered function keys. Can't really use convenient combos so a special keyboard may be necessary.
 mod1 = "f13"
 mod2 = "f14"
 
-
+#helper function to rewrite the PyperClip for readability. 
 class clip:
     def mod(data):
         pyperclip.copy(data)
     def read():
         return pyperclip.paste()
-    
+#Main function for saving and restoring clipboard profiles    
 class data:
-    def init(self):
-        pass
     def store(data):
         kb.send("ctrl+c")
         sleep(0.1)
@@ -89,6 +88,7 @@ class data:
 
         kb.send("ctrl+v")
         clip.mod(store)
+#setting keyboard hotkeys        
 kb.add_hotkey(mod1+'+1', lambda:data.store(1), timeout=1, suppress=True)
 kb.add_hotkey(mod1+'+2', lambda:data.store(2), timeout=1, suppress=True)
 kb.add_hotkey(mod1+'+3', lambda:data.store(3), timeout=1, suppress=True)
@@ -109,4 +109,5 @@ kb.add_hotkey(mod2+'+7', lambda:data.retrieve(7), timeout=2, suppress=True)
 kb.add_hotkey(mod2+'+8', lambda:data.retrieve(8), timeout=2, suppress=True)
 kb.add_hotkey(mod2+'+9', lambda:data.retrieve(9), timeout=2, suppress=True)
 
+#exit command
 kb.wait("ctrl+escape", suppress=True)
